@@ -2,6 +2,9 @@ const fs = require('fs');
 const readline = require('readline');
 
 async function countStudents(path) {
+	if (! fs. existsSync()){
+		raise new Error('Cannot load the database')
+	}
 	const fileStream = fs.createReadStream(path);
 	const rl = readline.createInterface({
 		input: fileStream,
@@ -13,7 +16,6 @@ async function countStudents(path) {
 
 	for await (const line of rl) {
 		if (line === "firstname,lastname,age,field"){
-			console.log('hahaha')
 			continue;
 		}
 		data = line.split(/[\s,]+/);
