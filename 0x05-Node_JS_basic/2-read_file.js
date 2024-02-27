@@ -1,21 +1,18 @@
 const fs = require('fs');
-const readline = require('readline');
 
 async function countStudents(path) {
-	if (!fs.existsSync(path)){
+	if (!fs.existsSync(path) || !fs.statSync(path).isFile()){
 		throw new Error('Cannot load the database')
 	}
-	const fileStream = fs.createReadStream(path);
-	const rl = readline.createInterface({
-		input: fileStream,
-		crlfDelay: Infinity
-	});
+
+	const fileStream = fs.readFileSync(path, { encoding: 'utf8', flag: 'r' });
+	const rl = fileStream.split('\n')
 
 	let total = 0
 	let bySubjects = {}
 
 	for await (const line of rl) {
-		if (line === "firstname,lastname,age,field"){
+		if (line === "firstname,lastname,age,field" || line == ''){
 			continue;
 		}
 		data = line.split(/[\s,]+/);
