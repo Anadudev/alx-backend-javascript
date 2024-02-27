@@ -1,10 +1,10 @@
 /**
  *displayMessage: a simple js function that
  *	logs a message passed as a parameter
- *@string {string} parameter to be logged
+ *@message {message} parameter to be logged
  */
-const displayMessage = (data) => {
-	console.log(data);
+const displayMessage = (message) => {
+	console.log(message);
 };
 
 module.exports = displayMessage;
