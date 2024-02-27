@@ -1,35 +1,38 @@
 const fs = require('fs');
 
 async function countStudents(path) {
-	if (!fs.existsSync(path) || !fs.statSync(path).isFile()){
-		throw new Error('Cannot load the database')
+	if (!fs.existsSync(path)) {
+		throw new Error('Cannot load the database');
 	}
 
-	const fileStream = fs.readFileSync(path, { encoding: 'utf8', flag: 'r' });
-	const rl = fileStream.split('\n')
+	const data = fs.readFileSync(path, 'utf8').trim().split('\n').filter(Boolean);
 
-	let total = 0
-	let bySubjects = {}
+	data.shift();
 
-	for await (const line of rl) {
-		if (line === "firstname,lastname,age,field" || line == ''){
-			continue;
+	let total = 0;
+	let bySubjects = {};
+
+	data.forEach(line => {
+		const [firstname, lastname, age, field] = line.split(',');
+		if (!firstname || !lastname || !age || !field) {
+			return;
 		}
-		data = line.split(/[\s,]+/);
-		if (bySubjects[data[3]] === undefined){
-			bySubjects[data[3]] = [1, data[0]];
-		}else
-		{
-			bySubjects[data[3]][0]++;
-			bySubjects[data[3]][1] += ', ' + data[0];
+		if (bySubjects[field] === undefined) {
+			bySubjects[field] = { count: 1, list: [firstname] };
+		} else {
+			bySubjects[field].count++;
+			bySubjects[field].list.push(firstname);
 		}
-		total ++;
-	}
+		total++;
+	});
+
 	console.log(`Number of students: ${total}`);
 	for (const key in bySubjects) {
-		console.log(`Number of students in ${key}: ` + 
-			`${bySubjects[key][0]}. List: ${bySubjects[key][1]}`);
+		console.log(`Number of students in `+
+			`${key}: ${bySubjects[key].count}. `+
+			`List: ${bySubjects[key].list.join(', ')}`);
 	}
+
 }
 
 module.exports = countStudents;
