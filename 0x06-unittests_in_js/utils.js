@@ -8,8 +8,9 @@ const Utils = {
 			case 'SUBTRACT':
 				return (a - b);
 			case 'DIVIDE':
-				if (b === 0)
+				if (b === 0) {
 					return ('Error');
+				}
 				return (a / b);
 		}
 	}

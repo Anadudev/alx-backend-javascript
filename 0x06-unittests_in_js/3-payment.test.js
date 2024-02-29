@@ -10,9 +10,6 @@ describe('sendPaymentRequestToApi', () => {
     sinon.spy(Utils, 'calculateNumber');
   });
 
-  afterEach(() => {
-    sinon.restore();
-  });
 
   it('Should accept two parameters', () => {
     sendPaymentRequestToApi(100, 20);
@@ -27,5 +24,9 @@ describe('sendPaymentRequestToApi', () => {
     sendPaymentRequestToApi(100, 20);
     expect(console.log.calledWith('The total is: 120')).to.be.true;
   });
+  afterEach(() => {
+    sinon.restore();
+  });
+
 });
 
