@@ -1,3 +1,15 @@
-"scripts": {
-  "test": "mocha"
+{
+  "name": "0x06-unittests_in_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "0-calcul.js",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^10.3.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC"
 }
