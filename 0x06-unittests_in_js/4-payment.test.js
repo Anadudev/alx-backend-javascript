@@ -6,8 +6,9 @@ const sendPaymentRequestToApi = require('./4-payment');
 
 describe('sendPaymentRequestToApi', () => {
 
+    let stubNum = null;
     beforeEach(() => {
-        calNumStub = sinon.stub(Utils, 'calculateNumber').returns(10);
+        stubNum = sinon.stub(Utils, 'calculateNumber').returns(10);
     });
 
     afterEach(() => {
@@ -16,11 +17,11 @@ describe('sendPaymentRequestToApi', () => {
 
     it('Should accept two parameters', () => {
         sendPaymentRequestToApi(100, 20);
-        expect(Utils.calculateNumber.calledWith('SUM', 100, 20)).to.be.true;
+        expect(stubNum.calledWith('SUM', 100, 20)).to.be.true;
     });
     it('Should accept two parameters', () => {
         sendPaymentRequestToApi(100, 20);
-        expect(Utils.calculateNumber.calledOnce).to.be.true;
+        expect(stubNum.calledOnce).to.be.true;
     });
     it('should log correct data to the console', () => {
         sinon.spy(console, 'log');
