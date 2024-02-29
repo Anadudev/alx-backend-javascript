@@ -1,10 +1,11 @@
 const sinon = require('sinon');
 const { calculateNumber } = require('./utils');
-const { expect } = require('chai');
+const chai = require('chai');
 const sendPaymentRequestToApi = require('./3-payment');
 
+const expect = chai.expect;
 
-describe('sendPaymentRequestToApi', () => {
+describe('sendPaymentRequestToApi', function(){
 
   beforeEach(() => {
     sinon.spy(Utils, 'calculateNumber');
