@@ -5,11 +5,14 @@
   "main": "0-calcul.js",
   "dependencies": {},
   "devDependencies": {
-    "mocha": "^10.3.0"
+    "chai": "^5.1.0",
+    "mocha": "^10.3.0",
+    "sinon": "^17.0.1"
   },
   "scripts": {
     "test": "mocha"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "keywords": []
 }
